@@ -62,14 +62,14 @@ abstract class FlagsEnum extends Enum
 
     public static function getSingleBitValues(): array
     {
-        static $values = null;
-        if (null === $values) {
-            $values = \array_filter(static::getValues(), function ($value) {
+        static $values = [];
+        if (null === $values[static::class]) {
+            $values[static::class] = \array_filter(static::getValues(), function ($value) {
                 // true for single-1 values, false for 0 or multiple-1 values
                 return 0 != $value && 0 == ($value & ($value - 1));
             });
         }
 
-        return $values;
+        return $values[static::class];
     }
 }

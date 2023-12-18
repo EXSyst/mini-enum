@@ -48,12 +48,12 @@ abstract class Enum
 
     public static function getValues(): array
     {
-        static $values = null;
-        if (null === $values) {
+        static $values = [];
+        if (null === $values[static::class]) {
             $clazz = new \ReflectionClass(static::class);
-            $values = $clazz->getConstants();
+            $values[static::class] = $clazz->getConstants();
         }
 
-        return $values;
+        return $values[static::class];
     }
 }
